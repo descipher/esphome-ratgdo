@@ -45,6 +45,9 @@ namespace ratgdo {
             ESP_LOGCONFIG(TAG, " Type: Target Distance Measurement");
             break;
 #endif
+        case RATGDO_TIME_TO_CLOSE:
+            ESP_LOGCONFIG(TAG, "  Type: Time to Close");
+            break;
         default:
             break;
         }
@@ -69,7 +72,14 @@ namespace ratgdo {
                 }
             }
         }
-        this->control(value);
+
+        // Don't send TTC commands during setup - only when user actively changes the value
+        if (this->number_type_ != RATGDO_TIME_TO_CLOSE) {
+            this->control(value);
+        } else {
+            // For TTC, just update the state without sending a command
+            this->update_state(value);
+        }
 
         switch (this->number_type_) {
         case RATGDO_ROLLING_CODE_COUNTER:
@@ -101,6 +111,11 @@ namespace ratgdo {
             // });
             break;
 #endif
+        case RATGDO_TIME_TO_CLOSE:
+            this->parent_->subscribe_time_to_close([this](float value) {
+                this->update_state(value);
+            });
+            break;
         default:
             break;
         }
@@ -138,6 +153,11 @@ namespace ratgdo {
             this->traits.set_max_value(3500);
             break;
 #endif
+    case RATGDO_TIME_TO_CLOSE:
+            this->traits.set_step(60);
+            this->traits.set_min_value(0.0);
+            this->traits.set_max_value(2400.0);
+            break;
         default:
             break;
         }
@@ -178,6 +198,9 @@ namespace ratgdo {
             this->parent_->set_target_distance_measurement(value);
             break;
 #endif
+    case RATGDO_TIME_TO_CLOSE:
+        this->parent_->set_time_to_close(static_cast<uint16_t>(value));
+        break;
         default:
             break;
         }

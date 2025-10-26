@@ -20,6 +20,7 @@ namespace ratgdo {
 #ifdef RATGDO_USE_DISTANCE_SENSOR
         RATGDO_TARGET_DISTANCE_MEASUREMENT,
 #endif
+        RATGDO_TIME_TO_CLOSE,
     };
 
     class RATGDONumber : public number::Number, public RATGDOClient, public Component {

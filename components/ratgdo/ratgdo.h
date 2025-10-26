@@ -87,6 +87,7 @@ namespace ratgdo {
 
         observable<DoorState> door_state { DoorState::UNKNOWN };
         observable<float> door_position { DOOR_POSITION_UNKNOWN };
+        observable<float> time_to_close_{ 0 };
         observable<DoorActionDelayed> door_action_delayed { DoorActionDelayed::NO };
 
         unsigned long door_start_moving { 0 };
@@ -162,6 +163,7 @@ namespace ratgdo {
         void calculate_presence();
         void presence_change(bool sensor_value);
 #endif
+        void set_time_to_close(uint16_t seconds);
 
         // light
         void light_toggle();
@@ -217,7 +219,7 @@ namespace ratgdo {
         void subscribe_vehicle_arriving_state(std::function<void(VehicleArrivingState)>&& f);
         void subscribe_vehicle_leaving_state(std::function<void(VehicleLeavingState)>&& f);
 #endif
-
+        void subscribe_time_to_close(std::function<void(float)>&& f);
     protected:
         // Pointers first (4-byte aligned)
         protocol::Protocol* protocol_;
