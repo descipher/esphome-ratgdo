@@ -7,7 +7,7 @@ Purchase boards at [ratcloud.llc](https://ratcloud.llc).
 
 ## Web Installer
 
-Flash the ESPHome based firmware using the [Web Installer](https://ratgdo.github.io/esphome-ratgdo/).
+Flash the ESPHome based firmware using the [Web Installer](https://descipher.github.io/esphome-ratgdo/).
 
 ## First use after adding to Home Assistant
 
