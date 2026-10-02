@@ -2,14 +2,14 @@
 substitutions:
   id_prefix: ratgdo32
   friendly_name: "ratgdo32"
-  uart_tx_pin: GPIO17
+  uart_tx_pin: GPIO22
   uart_rx_pin: GPIO21
-  input_obst_pin: GPIO4
-  status_door_pin: GPIO26
-  status_obstruction_pin: GPIO25
-  dry_contact_open_pin: GPIO13
-  dry_contact_close_pin: GPIO14
-  dry_contact_light_pin: GPIO27
+  input_obst_pin: GPIO23
+  status_door_pin: GPIO32
+  status_obstruction_pin: GPIO33
+  dry_contact_open_pin: GPIO18
+  dry_contact_close_pin: GPIO19
+  dry_contact_light_pin: GPIO17
 
 web_server:
   local: true
@@ -29,11 +29,11 @@ esp32:
     type: esp-idf
 
 dashboard_import:
-  package_import_url: github://ratgdo/esphome-ratgdo/v32board.yaml@main
+  package_import_url: github://descipher/esphome-ratgdo/v32board.yaml@main
 
 packages:
   remote_package:
-    url: https://github.com/ratgdo/esphome-ratgdo
+    url: https://github.com/descipher/esphome-ratgdo
     ref: main
     files: [base.yaml]
     refresh: 1s
